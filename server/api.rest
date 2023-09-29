@@ -6,7 +6,22 @@ GET http://localhost:4000/api/employees/651699fc20805f0c803faae3
 
 ###
 POST http://localhost:4000/api/employees/
- content-Type: application/json {"name": "Miguel"}
+Content-Type: application/json 
+
+ {
+    "name": "Mauro",
+    "position": "Jnr. Developer",
+    "office": "Valencia",
+    "salary": "20000"
+}
 
 ###
-DELETE http://localhost:4000/api/employees/{id}
+DELETE http://localhost:4000/api/employees/65169a4120805f0c803faae6
+
+###
+PUT http://localhost:4000/api/employees/6516b985ee04eecfccc32630
+Content-Type: application/json
+
+{
+    "salary": 50000
+}

@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 mongoose
     .connect('mongodb://127.0.0.1:27017/mean-employees', {
         useUnifiedTopology: true,
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        //useFindAndModify: false
     })
     .then((db) => console.log('Database connected!'))
     .catch((err) => console.error(err));

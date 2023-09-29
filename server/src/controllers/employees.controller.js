@@ -2,6 +2,7 @@ const hello = (req, res) => res.send('hello')
 
 const employeeCtrl = {};
 
+const { rawListeners } = require('../app');
 const Employee = require('../models/Employee')
 
 
@@ -18,16 +19,19 @@ employeeCtrl.createEmployee = async (req, res) => {
     res.send({message: 'Employee created!'})
 };
 
-employeeCtrl.getEmployee = (req, res) => {
-    res.send('getting one employee')
+employeeCtrl.getEmployee = async (req, res) => {
+    const employee = await Employee.findById(req.params.id)
+    res.send(employee)
 };
 
-employeeCtrl.editEmployee = (req, res) => {
-    res.send('PUT / edit employee')
+employeeCtrl.editEmployee = async (req, res) => {
+    await Employee.findByIdAndUpdate(req.params.id, req.body)
+    res.json({status: "Employee Updated"})
 };
 
-employeeCtrl.deleteEmployee = (req, res) => {
-    res.send('DELETE employee')
+employeeCtrl.deleteEmployee =  async (req, res) => {
+    await Employee.findByIdAndDelete(req.params.id)
+    res.json({status: 'Employee Deleted'})
 };
 
 module.exports = employeeCtrl;
