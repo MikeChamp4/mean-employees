@@ -63,5 +63,12 @@ export class EmployeeComponent implements OnInit {
       event.preventDefault();
       form.resetForm();
     }
+
+    // emptyFields(employee: Employee): Employee{
+
+    //   if(employee.name == "")
+
+    //   return employee;
+    // }
 }
 
