@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
 })
 export class EmployeeComponent implements OnInit {
 
-  constructor(public employeeService: EmployeeService){ }
+  constructor( public employeeService: EmployeeService){ }
 
     ngOnInit(): void {
       this.getEmployees();
@@ -27,6 +27,30 @@ export class EmployeeComponent implements OnInit {
     }
 
     addEmployee(form: NgForm){
+
+      let missingFields: string = "There are missing fields to fill out: \n";
+
+      if(form.value.name === ""){
+        missingFields += "Name\n";
+      }
+
+      if(form.value.position === ""){
+        missingFields += "Position\n"
+      }
+
+      if(form.value.office === ""){
+        missingFields += "Office\n"
+      }
+
+      if(form.value.salary === 0){
+        missingFields += "Salary\n"
+      }
+
+      if(missingFields !== ""){
+        alert(missingFields)
+        return;
+      }
+
       if(form.value._id){
         this.employeeService.putEmployee(form.value).subscribe(
           (res: any) => console.log(res),
@@ -56,19 +80,33 @@ export class EmployeeComponent implements OnInit {
     }
 
     editEmployee(employee: Employee){
-      this.employeeService.selectedEmployee = employee;
+      this.employeeService.selectedEmployee = this.emptyData(employee);
     }
 
     clearForm(event: Event, form: NgForm) {
       event.preventDefault();
-      form.resetForm();
+      form.reset();
     }
 
-    // emptyFields(employee: Employee): Employee{
+    emptyData(employee: Employee): Employee{
 
-    //   if(employee.name == "")
+      // if(employee.name === ""){
+      //   alert("You must fill out the name")
+      // }
 
-    //   return employee;
-    // }
+      // if(employee.position === ""){
+      //   alert("You must fill out the position")
+      // }
+
+      // if(employee.office === ""){
+      //   alert("You must fill out the office")
+      // }
+
+      // if(employee.salary === 0){
+      //   alert("You must fill out the salary");
+      // }
+
+      return employee;
+    }
 }
 

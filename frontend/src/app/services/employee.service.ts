@@ -19,8 +19,8 @@ export class EmployeeService {
     // updatedAt: "",
     // _id: ""
   };
-  employees: Employee[] = [];
 
+  employees: Employee[] = [];
   constructor(private http: HttpClient) { }
 
   getEmployees(): any {
@@ -30,7 +30,6 @@ export class EmployeeService {
   createEmployee(employee: Employee){
     return this.http.post(this.URL_API, employee);
   }
-
 
   putEmployee(employee: Employee){
     return this.http.put(`${this.URL_API}/${employee._id}`, employee);
