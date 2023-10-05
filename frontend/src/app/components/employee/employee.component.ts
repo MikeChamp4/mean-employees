@@ -29,31 +29,6 @@ export class EmployeeComponent implements OnInit {
   }
 
   addEmployee(form: NgForm) {
-    // let missingFields: string = "";
-
-    // if(form.value.name === ""){
-    //   missingFields += "Name\n";
-    // }
-
-    // if(form.value.position === ""){
-    //   missingFields += "Position\n"
-    // }
-
-    // if(form.value.office === ""){
-    //   missingFields += "Office\n"
-    // }
-
-    // if(form.value.salary === 0){
-    //   missingFields += "Salary\n"
-    // }
-
-    // if(missingFields !== ""){
-    //   // this.toastr.error(`There are missing fields to fill out: \n
-    //   //                     ${missingFields}`);
-    //   this.showToast('e', `There are missing fields to fill out: \n
-    //                        ${missingFields}`);
-    //   return;
-    // }
 
     const employee = this.checkEmployee(form);
     if (employee === null) {
@@ -62,14 +37,18 @@ export class EmployeeComponent implements OnInit {
 
     if (form.value._id) {
       this.employeeService.putEmployee(form.value).subscribe(
-        (res: any) => console.log(res),
+        (res: any) => {
+          this.showToast("s", 'Updated Employee!!')
+          console.log(res)
+        },
         (err: any) => console.error(err)
       );
     } else {
       this.employeeService.createEmployee(form.value).subscribe(
         (res: any) => {
           this.getEmployees();
-          this.showToast('s', 'Employee created!!');
+          this.showToast('s', 'Created Employee!!');
+          console.log(res)
           form.reset();
         },
         (err: any) => console.error(err)
@@ -82,6 +61,7 @@ export class EmployeeComponent implements OnInit {
       this.employeeService.deleteEmployee(id).subscribe(
         (res) => {
           console.log(res), this.getEmployees();
+          this.showToast('e', 'Deleted Employee')
         },
         (err) => console.error(err)
       );
@@ -94,7 +74,12 @@ export class EmployeeComponent implements OnInit {
 
   clearForm(event: Event, form: NgForm) {
     event.preventDefault();
-    form.reset();
+    form.reset({
+      name: '',
+      position: '',
+      office: '',
+      salary: 0
+    });
   }
 
   showToast(type: string, message: string) {
