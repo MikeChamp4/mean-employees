@@ -1,9 +1,11 @@
+//import { MatDialog } from '@angular/material';
 import { Employee } from 'src/app/models/employee';
 import { EmployeeService } from './../../services/employee.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IndividualConfig, ToastrService } from 'ngx-toastr';
 import { NgConfirmService } from 'ng-confirm-box';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-employee',
@@ -14,7 +16,8 @@ export class EmployeeComponent implements OnInit {
   constructor(
     public employeeService: EmployeeService,
     private toastr: ToastrService,
-    private confirmService: NgConfirmService
+    private confirmService: NgConfirmService,
+    //private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -60,18 +63,34 @@ export class EmployeeComponent implements OnInit {
   }
 
   deleteEmployee(id: string) {
-      this.confirmService.showConfirm("Are your sure want to delete it?",
-        () => {
-          this.employeeService.deleteEmployee(id).subscribe(
-            (res) => {
-              console.log(res), this.getEmployees();
-              this.showToast('e', 'Deleted Employee')
-            },
-            (err) => console.error(err)
-          );
-        },
-        () => { }
-      )
+      // this.confirmService.showConfirm("Are your sure want to delete it?",
+      //   () => {
+      //     this.employeeService.deleteEmployee(id).subscribe(
+      //       (res) => {
+      //         console.log(res), this.getEmployees();
+      //         this.showToast('e', 'Deleted Employee')
+      //       },
+      //       (err) => console.error(err)
+      //     );
+      //   },
+      //   () => { }
+      // )
+      // const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      //   data: 'Are you sure you want to delete this employee?'
+      // });
+
+      // dialogRef.afterClosed().subscribe(result => {
+      //   if (result) {
+      //     this.employeeService.deleteEmployee(id).subscribe(
+      //       (res) => {
+      //         console.log(res);
+      //         this.getEmployees();
+      //         this.showToast('e', 'Deleted Employee');
+      //       },
+      //       (err) => console.error(err)
+      //     );
+      //   }
+      // });
   }
 
   editEmployee(employee: Employee) {

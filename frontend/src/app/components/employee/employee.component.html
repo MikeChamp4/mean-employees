@@ -69,8 +69,8 @@
 
   <!-- TABLE -->
   <div class="col-md-8">
-    <table class="table  table-striped">
-      <thead>
+    <table class="table table-striped">
+      <thead class="">
         <tr>
           <th>Name</th>
           <th>Position</th>
@@ -98,6 +98,7 @@
               (click)="deleteEmployee(employee._id ? employee._id : '')"
             >
               <i class="material-icons">delete</i>
+              <app-confirm-dialog></app-confirm-dialog>
             </button>
           </td>
         </tr>

@@ -10,12 +10,14 @@ import { NgConfirmModule } from 'ng-confirm-box';
 import { AppComponent } from './app.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { NavbarComponent } from './sharepage/navbar/navbar.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeComponent,
     NavbarComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
