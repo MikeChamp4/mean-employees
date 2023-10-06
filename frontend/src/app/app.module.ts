@@ -3,7 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { NgConfirmModule } from 'ng-confirm-box';
 
 
 import { AppComponent } from './app.component';
@@ -14,14 +15,15 @@ import { NavbarComponent } from './sharepage/navbar/navbar.component';
   declarations: [
     AppComponent,
     EmployeeComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgConfirmModule
   ],
   providers: [],
   bootstrap: [AppComponent]

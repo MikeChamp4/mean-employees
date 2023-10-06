@@ -3,6 +3,7 @@ import { EmployeeService } from './../../services/employee.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IndividualConfig, ToastrService } from 'ngx-toastr';
+import { NgConfirmService } from 'ng-confirm-box';
 
 @Component({
   selector: 'app-employee',
@@ -12,7 +13,8 @@ import { IndividualConfig, ToastrService } from 'ngx-toastr';
 export class EmployeeComponent implements OnInit {
   constructor(
     public employeeService: EmployeeService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private confirmService: NgConfirmService
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +40,7 @@ export class EmployeeComponent implements OnInit {
     if (form.value._id) {
       this.employeeService.putEmployee(form.value).subscribe(
         (res: any) => {
+          this.getEmployees();
           this.showToast("s", 'Updated Employee!!')
           console.log(res)
         },
@@ -57,18 +60,23 @@ export class EmployeeComponent implements OnInit {
   }
 
   deleteEmployee(id: string) {
-    if (confirm('Are your sure want to delete it?')) {
-      this.employeeService.deleteEmployee(id).subscribe(
-        (res) => {
-          console.log(res), this.getEmployees();
-          this.showToast('e', 'Deleted Employee')
+      this.confirmService.showConfirm("Are your sure want to delete it?",
+        () => {
+          this.employeeService.deleteEmployee(id).subscribe(
+            (res) => {
+              console.log(res), this.getEmployees();
+              this.showToast('e', 'Deleted Employee')
+            },
+            (err) => console.error(err)
+          );
         },
-        (err) => console.error(err)
-      );
-    }
+        () => { }
+      )
   }
 
   editEmployee(employee: Employee) {
+    //this.clearForm(event, form); // Restablecer los valores del formulario
+    this.getEmployees();
     this.employeeService.selectedEmployee = employee;
   }
 
