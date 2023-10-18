@@ -2,16 +2,9 @@
   <div class="col-md-4">
     <div class="card">
       <div class="card-body">
-        <form
-          class=""
-          #employeeForm="ngForm"
-          (ngSubmit)="addEmployee(employeeForm)"
-        >
-          <input
-            type="hidden"
-            name="_id"
-            [(ngModel)]="employeeService.selectedEmployee._id"
-          />
+        <form class="" #employeeForm="ngForm" (ngSubmit)="addEmployee(employeeForm)" >
+
+          <input type="hidden" name="_id" [(ngModel)]="employeeService.selectedEmployee._id">
 
           <div class="form-group">
             <input
@@ -20,6 +13,7 @@
               class="form-control"
               placeholder="Enter your FullName"
               [(ngModel)]="employeeService.selectedEmployee.name"
+
             />
           </div>
 
@@ -30,6 +24,7 @@
               class="form-control"
               placeholder="Enter your Position"
               [(ngModel)]="employeeService.selectedEmployee.position"
+
             />
           </div>
 
@@ -40,6 +35,7 @@
               class="form-control"
               placeholder="Enter your Office"
               [(ngModel)]="employeeService.selectedEmployee.office"
+
             />
           </div>
 
@@ -54,14 +50,14 @@
           </div>
 
           <div class="container p-2 fw-bold">
-            <button class="btn btn-primary m-2" type="submit">Save</button>
-            <button
-              class="btn btn-secondary"
-              (click)="clearForm($event, employeeForm)"
-            >
+            <button class="btn btn-primary m-2">
+              Save
+            </button>
+            <button class="btn btn-secondary" (click)="clearForm($event, employeeForm)">
               Clear
             </button>
           </div>
+
         </form>
       </div>
     </div>
@@ -87,16 +83,10 @@
           <td>{{ employee.office }}</td>
           <td>{{ employee.salary }}€</td>
           <td>
-            <button
-              class="btn btn-secondary btn-sm m-2"
-              (click)="editEmployee(employee)"
-            >
+            <button class="btn btn-secondary btn-sm " (click)="editEmployee(employee)">
               <i class="material-icons">edit</i>
             </button>
-            <button
-              class="btn btn-danger btn-sm custom-ng-confirm"
-              (click)="deleteEmployee(employee._id ? employee._id : '')"
-            >
+            <button class="btn btn-danger btn-sm" (click)="deleteEmployee(employee._id ? employee._id : '')" >
               <i class="material-icons">delete</i>
               <app-confirm-dialog></app-confirm-dialog>
             </button>
